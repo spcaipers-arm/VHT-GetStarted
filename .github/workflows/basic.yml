@@ -47,7 +47,7 @@ jobs:
     - name: Install Python packages
       run: pip install -r requirements.txt
 
-    - uses: ARM-Software/VHT-AMI@v2
+    - uses: spcaipers-arm/VHT-AMI@QE-2706
       id: vht
       with:
         ec2_instance_id: ${{ secrets.AWS_INSTANCE_ID }}
