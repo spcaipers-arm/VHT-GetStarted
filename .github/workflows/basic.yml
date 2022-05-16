@@ -27,6 +27,8 @@ env:
   AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
   AWS_IAM_PROFILE: ${{ secrets.AWS_IAM_PROFILE }}
   AWS_SUBNET_ID: ${{ secrets.AWS_SUBNET_ID }}
+  AWS_SECURITY_GROUP_ID: ${{ secrets.AWS_SECURITY_GROUP_ID }} 
+  
 jobs:
   ci_test:
     runs-on: ubuntu-latest
