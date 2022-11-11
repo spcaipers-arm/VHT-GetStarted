@@ -4,10 +4,11 @@ on:
     branches: [ main ]
   pull_request:
     paths:
-      - .github/workflows/basic.yml
+      - .github/workflows/basic-two-tier.yml
       - basic/**/*
 jobs:
   upload_pr_number:
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: Save PR number
