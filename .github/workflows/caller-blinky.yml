@@ -1,11 +1,11 @@
-name: Caller Arm Virtual Hardware basic example
+name: Caller Arm Virtual Hardware blinky example
 on:
   push:
     branches: [ main ]
   pull_request:
     paths:
-      - .github/workflows/caller-basic.yml
-      - basic/**/*
+      - .github/workflows/caller-blinky.yml
+      - Blinky_Cortex-M85/**/*
 jobs:
   upload_pr_number:
     if: ${{ github.event_name == 'pull_request' }}

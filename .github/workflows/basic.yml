@@ -28,7 +28,8 @@ env:
   # Enable the next three lines if you are using IAM User and you added them in the repo's secret.
   # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  # AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+  AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
   AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
   AWS_IAM_PROFILE: ${{ secrets.AWS_IAM_PROFILE }}
   AWS_SECURITY_GROUP_ID: ${{ secrets.AWS_SECURITY_GROUP_ID }}
@@ -111,8 +112,8 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::720528183931:role/Proj-vht-assume-role
-        aws-region: eu-west-1
+        role-to-assume: ${{ env.AWS_ASSUME_ROLE }}
+        aws-region: ${{ env.DEFAULT_REGION }}
 
     - name: Run tests
       id: avh
@@ -168,7 +169,7 @@ jobs:
   set_success_status_to_pr:
     runs-on: ubuntu-latest
     needs: ci_test
-    if: ${{ failure() && github.event.workflow_run.event == 'pull_request' }}
+    if: ${{ success() && github.event.workflow_run.event == 'pull_request' }}
     steps:
       - name: Set success status to the PR
         env:
